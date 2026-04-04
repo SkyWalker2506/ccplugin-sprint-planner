@@ -1,6 +1,14 @@
-# ccplugin-sprint-planner
+# sprint-planner — Claude Code Plugin
+
+by [Musab Kara](https://linkedin.com/in/musab-kara-85580612a) · [GitHub](https://github.com/SkyWalker2506)
 
 Claude Code plugin for sprint planning and PRD-to-sprint workflow. Generates epics, stories, and Jira tasks from analysis reports.
+
+## Install
+
+```bash
+claude plugin install sprint-planner@musabkara-claude-marketplace
+```
 
 ## Features
 
@@ -9,14 +17,6 @@ Claude Code plugin for sprint planning and PRD-to-sprint workflow. Generates epi
 - **Sprint Organization** -- 5-sprint structure with themed focus areas (Security, Performance, UX, Growth, Monetization)
 - **Jira Integration** -- Create epics and stories with labels, story points, and acceptance criteria via Atlassian MCP
 - **Story Point Estimation** -- S=1, M=2, L=3, XL=5 scale with 25-35 SP capacity per sprint
-
-## Installation
-
-Add this plugin to your Claude Code configuration:
-
-```bash
-claude plugin add SkyWalker2506/ccplugin-sprint-planner
-```
 
 ## Usage
 
@@ -55,3 +55,8 @@ Each finding/recommendation becomes a task with:
 ## License
 
 MIT
+
+## Part of
+
+- [claude-config](https://github.com/SkyWalker2506/claude-config) — Multi-Agent OS for Claude Code (110 agents, local-first routing)
+- [Plugin Marketplace](https://github.com/SkyWalker2506/claude-marketplace) — Browse & install all 14 plugins
