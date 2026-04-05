@@ -2,7 +2,10 @@
   "name": "sprint-planner",
   "version": "1.0.0",
   "description": "Sprint planning and PRD-to-sprint workflow \u2014 generates epics, stories, and Jira tasks from analysis reports",
-  "author": "Musab Kara",
+  "author": {
+    "name": "Musab Kara",
+    "url": "https://github.com/SkyWalker2506"
+  },
   "license": "MIT",
   "category": "productivity",
   "keywords": [
