@@ -6,7 +6,7 @@
 /sprint-plan                    # Full flow: generate plan + create Jira issues
 /sprint-plan plan-only          # Generate plan only (no Jira)
 /sprint-plan jira-only          # Push existing plan to Jira
-/sprint-plan sync               # Sync Jira issues with current plan
+/sprint-plan sync               # Sync active Jira sprint tasks with local plan
 ```
 
 ## Prerequisites
@@ -79,6 +79,72 @@ The plan document contains:
 3. Link related tasks with "blocks" / "is blocked by" relationships
 
 **Parallel execution:** 5 sprints can be created via 5 parallel agent calls.
+
+## Sync Workflow (`/sprint-plan sync`)
+
+Compares the active Jira sprint with the local `analysis/SPRINT_PLAN.md` and surfaces the diff.
+
+### Steps
+
+#### 1. Fetch Active Jira Sprint
+
+```
+searchJiraIssuesUsingJql: project = <KEY> AND sprint in openSprints()
+Fields: summary, status, assignee, priority, story_points, labels
+```
+
+#### 2. Read Local Plan
+
+Parse `analysis/SPRINT_PLAN.md` — extract all tasks with their expected status, priority, and sprint assignment.
+
+If `SPRINT_PLAN.md` does not exist, abort and prompt:
+> "No local plan found. Run `/sprint-plan` first to generate one."
+
+#### 3. Diff & Classify
+
+Compare Jira tasks vs local plan tasks by summary (fuzzy match, case-insensitive):
+
+| Category | Condition |
+|----------|-----------|
+| **In Sync** | Task exists in both; status matches |
+| **Status Drift** | Task exists in both; Jira status differs from plan expectation |
+| **Jira Only** | Task exists in Jira sprint but not in local plan |
+| **Plan Only** | Task in local plan assigned to active sprint but missing from Jira |
+
+#### 4. Display Diff Report
+
+Output to console in this format:
+
+```
+## /sprint-plan sync — <Sprint Name> (<date>)
+
+### Status Drift (N)
+| Key      | Summary               | Plan Status | Jira Status |
+|----------|-----------------------|-------------|-------------|
+| PROJ-42  | Fix login crash       | In Progress | Done        |
+
+### Jira Only (N)
+| Key      | Summary               | Status      |
+|----------|-----------------------|-------------|
+| PROJ-55  | Hotfix payment error  | In Progress |
+
+### Plan Only (N)
+| Title                        | Priority | Sprint |
+|------------------------------|----------|--------|
+| Add onboarding analytics     | P1       | 2      |
+
+### In Sync (N)
+All N matching tasks are aligned.
+```
+
+#### 5. Optional Actions
+
+After displaying the diff, offer:
+- `[P]ush Plan Only tasks to Jira` — create missing issues
+- `[U]pdate local plan` — write Jira status back to `SPRINT_PLAN.md`
+- `[S]kip` — exit without changes
+
+Only execute the chosen action; do not auto-apply both.
 
 ## Output
 
