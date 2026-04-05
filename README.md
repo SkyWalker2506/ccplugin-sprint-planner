@@ -7,7 +7,8 @@ Claude Code plugin for sprint planning and PRD-to-sprint workflow. Generates epi
 ## Install
 
 ```bash
-claude plugin install sprint-planner@musabkara-claude-marketplace
+git clone https://github.com/SkyWalker2506/ccplugin-sprint-planner.git
+claude plugin install ./ccplugin-sprint-planner
 ```
 
 ## Features
@@ -24,7 +25,6 @@ claude plugin install sprint-planner@musabkara-claude-marketplace
 /sprint-plan                    # Full flow: generate plan + create Jira issues
 /sprint-plan plan-only          # Generate plan only (no Jira)
 /sprint-plan jira-only          # Push existing plan to Jira
-/sprint-plan sync               # Sync Jira issues with current plan
 ```
 
 ## Prerequisites
@@ -52,11 +52,16 @@ Each finding/recommendation becomes a task with:
 - Priority (P0/P1/P2/P3)
 - Story points (S=1, M=2, L=3, XL=5)
 
+## Roadmap
+
+- `/sprint-plan sync` — Sync Jira issues with current plan (not yet implemented)
+- Marketplace install (`claude plugin install sprint-planner@musabkara-claude-marketplace`) — pending marketplace launch
+
 ## License
 
 MIT
 
 ## Part of
 
-- [claude-config](https://github.com/SkyWalker2506/claude-config) — Multi-Agent OS for Claude Code (110 agents, local-first routing)
-- [Plugin Marketplace](https://github.com/SkyWalker2506/claude-marketplace) — Browse & install all 14 plugins
+- [claude-config](https://github.com/SkyWalker2506/claude-config) — Multi-Agent OS for Claude Code (134 agents, local-first routing)
+- [Plugin Marketplace](https://github.com/SkyWalker2506/claude-marketplace) — Browse & install all plugins
