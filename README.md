@@ -48,19 +48,6 @@ claude plugin install sprint-planner@musabkara-claude-marketplace
 | 4      | Analytics & Growth         | 25-35       |
 | 5      | Monetization & ASO         | 25-35       |
 
-## Task Extraction
-
-Each finding/recommendation becomes a task with:
-- English title (max 80 characters)
-- Description with acceptance criteria
-- Label (security, perf, arch, ui, growth, analytics, data, content, monetization, a11y, seo)
-- Priority (P0/P1/P2/P3)
-- Story points (S=1, M=2, L=3, XL=5)
-
-## Roadmap
-
-- `/sprint-plan sync` — Sync Jira issues with current plan (not yet implemented)
-
 ## License
 
 MIT
@@ -68,4 +55,5 @@ MIT
 ## Part of
 
 - [claude-config](https://github.com/SkyWalker2506/claude-config) — Multi-Agent OS for Claude Code (134 agents, local-first routing)
-- [Plugin Marketplace](https://github.com/SkyWalker2506/claude-marketplace) — Browse & install all plugins
+- [Plugin Marketplace](https://github.com/SkyWalker2506/claude-marketplace) — Browse & install all 18 plugins
+- [ClaudeHQ](https://github.com/SkyWalker2506/ClaudeHQ) — Claude ecosystem HQ
