@@ -1,26 +1,12 @@
 {
   "name": "sprint-planner",
   "version": "1.0.0",
-  "description": "Sprint planning and PRD-to-sprint workflow \u2014 generates epics, stories, and Jira tasks from analysis reports",
+  "description": "Sprint planning and PRD-to-sprint workflow — generates epics, stories, and Jira tasks from analysis reports.",
   "author": {
     "name": "Musab Kara",
     "url": "https://github.com/SkyWalker2506"
   },
   "license": "MIT",
   "category": "productivity",
-  "keywords": [
-    "sprint",
-    "planning",
-    "agile",
-    "epic",
-    "story",
-    "estimation",
-    "backlog"
-  ],
-  "commands": [
-    "commands/sprint-plan.md"
-  ],
-  "skills": [
-    "skills/sprint-planner/SKILL.md"
-  ]
+  "keywords": ["sprint", "planning", "agile", "epic", "story", "estimation", "backlog"]
 }
