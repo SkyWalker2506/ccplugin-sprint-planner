@@ -16,37 +16,64 @@ Or via Claude Code native marketplace:
 claude plugin install sprint-planner@musabkara-claude-marketplace
 ```
 
+## Quick Start
+
+```bash
+# 1. Run project analysis (generates analysis/MASTER_ANALYSIS.md)
+/project-analysis --all
+
+# 2. Preview the sprint plan without writing to Jira
+/sprint-plan --dry-run
+
+# 3. Generate plan and create Jira epics + tasks
+/sprint-plan
+
+# 4. Check if Jira is in sync with your local plan
+/sprint-plan sync
+```
+
 ## Features
 
-- **Plan Generation** -- Parse analysis reports or PRDs, extract tasks with priorities and story points, organize into time-boxed sprints
-- **Priority Mapping** -- Automatically categorize findings as P0-P3 based on severity (Critical/Must Have/Nice-to-Have)
-- **Sprint Organization** -- 5-sprint structure with themed focus areas (Security, Performance, UX, Growth, Monetization)
-- **Jira Integration** -- Create epics and stories with labels, story points, and acceptance criteria via Atlassian MCP
-- **Story Point Estimation** -- S=1, M=2, L=3, XL=5 scale with 25-35 SP capacity per sprint
+- **Plan Generation** — Parse analysis reports or PRDs, extract tasks with priorities and story points, organize into time-boxed sprints
+- **Priority Mapping** — Automatically categorize findings as P0-P3 based on severity (Critical/Must Have/Nice-to-Have)
+- **Adaptive Sprint Themes** — Sprint focus areas adapt to project type (mobile app, web, CLI, API, plugin)
+- **Jira Integration** — Create epics and stories with labels, story points, and acceptance criteria via Atlassian MCP
+- **Idempotent** — Re-running skips Jira epics/tasks that already exist; no duplicates
+- **Dry-run mode** — Preview SPRINT_PLAN.md without any Jira writes
+- **Dependency graph** — SPRINT_PLAN.md includes wave and depends_on columns for execution ordering
+- **Story Point Estimation** — S=1, M=2, L=3, XL=5 scale with configurable capacity per sprint
 
 ## Usage
 
 ```
 /sprint-plan                    # Full flow: generate plan + create Jira issues
 /sprint-plan plan-only          # Generate plan only (no Jira)
+/sprint-plan --dry-run          # Preview SPRINT_PLAN.md, no Jira writes
 /sprint-plan jira-only          # Push existing plan to Jira
+/sprint-plan sync               # Sync active Jira sprint with local plan
+/sprint-plan --sprints N        # Configure sprint count (default: 5)
+/sprint-plan --capacity N       # Configure SP capacity per sprint (default: 30)
 ```
 
 ## Prerequisites
 
 - `analysis/` directory with at least one analysis report (`.md`)
 - `analysis/MASTER_ANALYSIS.md` is used as the primary source when present
-- Atlassian MCP active for Jira integration (optional for plan-only mode)
+- Atlassian MCP active for Jira integration (optional for `plan-only` and `--dry-run`)
+- Jira project key in CLAUDE.md (auto-detected; fallback: asks user)
 
-## Sprint Structure
+## Sprint Structure (Adaptive)
 
-| Sprint | Focus                      | SP Capacity |
-|--------|----------------------------|-------------|
-| 1      | Security & Critical Fixes  | 25-35       |
-| 2      | Performance & Architecture | 25-35       |
-| 3      | UX & Accessibility         | 25-35       |
-| 4      | Analytics & Growth         | 25-35       |
-| 5      | Monetization & ASO         | 25-35       |
+Sprint themes are chosen based on project type detected from CLAUDE.md/README:
+
+| Project Type | Sprint Themes |
+|--------------|---------------|
+| Mobile app | UX → Performance → Security → Growth → ASO |
+| Web app | Security → Performance → UX → SEO → Growth |
+| CLI tool | Architecture → Testing → DX → Distribution → Docs |
+| API/backend | Security → Performance → Architecture → Testing → Docs |
+| Plugin | DX → Reliability → Docs → Examples → Distribution |
+| Unknown | Security → Performance → UX → Growth → Monetization |
 
 ## License
 
